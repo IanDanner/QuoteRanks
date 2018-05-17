@@ -1,0 +1,17 @@
+<div>
+  <a [routerLink]="['']">Home</a>
+  <p>Add a new author:</p>
+  <form (submit)="onCreate()" #formData='ngForm'>
+    <label>Name:</label>
+    <input type="text" name="name" [(ngModel)]="newAuthor.name" required #name='ngModel' minlength="3">
+
+    <div style="color: red" class="error" *ngIf="name.errors">
+        <p *ngIf="name.errors.minlength">Must Be Longer than 3 Characters</p>
+        <p *ngIf="name.errors.required">Required</p>
+    </div>
+    <p *ngIf="errors.name" style="color: red">{{errors.name.message}}</p>    
+
+    <input type="submit" value="Submit" [disabled]="formData.invalid">
+    <input type="submit" value="Cancel" [routerLink]="['']">   
+  </form>
+</div>

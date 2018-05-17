@@ -1,0 +1,13 @@
+<div>
+  <a [routerLink]="['']">Home</a>
+  <p>Edit this author</p>
+  <form *ngIf="author" (submit)="onEdit(author)" #formData='ngForm'>
+    <label>Name:</label>
+    <input type="text" value="author.name" name="editAuthor.name" [(ngModel)]="author.name" required #name='ngModel' minlength="3">
+    <span class="error" *ngIf="name.errors">{{name.errors | json}}</span>
+    <p *ngIf="errors.title" style="color: red">{{errors.name.message}}</p>
+
+    <input type="submit" value="Submit" [disabled]="formData.invalid">
+    <input type="submit" value="Cancel" [routerLink]="['']">   
+  </form>
+</div>

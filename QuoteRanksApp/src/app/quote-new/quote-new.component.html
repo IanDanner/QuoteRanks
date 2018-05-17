@@ -1,0 +1,20 @@
+<div *ngIf="author.name">
+  <a [routerLink]="['']">Home</a>
+  <p>Provide a quotes by {{author.name}}:</p>
+  <form (submit)="onCreate(author._id)" #formData='ngForm'>
+    <label>Quote:</label>
+    <input type="text" name="quote" [(ngModel)]="newQuote.quote" required #quote='ngModel' minlength="3">
+    
+
+    <input type="submit" value="Submit" [disabled]="formData.invalid">
+    <input type="submit" value="Cancel" [routerLink]="['', 'QuoteList', author._id]">  
+    
+    <div style="color: red" class="error" *ngIf="quote.errors">
+        <p *ngIf="quote.errors.minlength">Must Be Longer than 3 Characters</p>
+        <p *ngIf="quote.errors.required">Required</p>
+    </div>
+    
+
+    <p *ngIf="errors.quote" style="color: red">{{errors.quote.message}}</p>
+  </form>
+</div>
